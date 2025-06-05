@@ -46,19 +46,19 @@ export default function Sidebar({
             </div>
 
             <nav className="flex flex-col space-y-3">
-              <Link href="/admin" className="flex items-center gap-3 px-3 py-2 rounded hover:bg-gray-700 transition" onClick={() => setIsOpen(false)}>
+              <Link href="/admin" className="flex items-center gap-3 px-3 py-2 rounded hover:bg-gray-300 transition" onClick={() => setIsOpen(false)}>
                 <FiHome />
                 <span>Dashboard</span>
               </Link>
 
-              <Link href="/admin/members" className="flex items-center gap-3 px-3 py-2 rounded hover:bg-gray-700 transition" onClick={() => setIsOpen(false)}>
+              <Link href="/admin/members" className="flex items-center gap-3 px-3 py-2 rounded hover:bg-gray-300 transition" onClick={() => setIsOpen(false)}>
                 <FiUsers />
                 <span>Members</span>
               </Link>
 
               <button
                 onClick={() => clerk.signOut()}
-                className="flex items-center gap-3 px-3 py-2 rounded hover:bg-gray-700 transition w-full text-left mt-auto"
+                className="flex items-center gap-3 px-3 py-2 rounded hover:bg-gray-300 transition w-full text-left mt-auto"
               >
                 <FiLogOut />
                 <span>Logout</span>

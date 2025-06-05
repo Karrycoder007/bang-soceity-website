@@ -15,6 +15,14 @@ export default function MembersPage() {
   const [members, setMembers] = useState<Membership[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const fetchMembers = async () => {
     setLoading(true);
@@ -27,7 +35,6 @@ export default function MembersPage() {
       setError("Failed to fetch members.");
       console.error("Supabase error:", error);
     } else {
-      console.log("Fetched members:", data);
       setMembers(data || []);
       setError(null);
     }
@@ -65,32 +72,74 @@ export default function MembersPage() {
       )}
 
       {!loading && members.length > 0 && (
-        <div className="overflow-auto max-h-[70vh] border border-gray-700 rounded">
-          <table className="min-w-full">
-            <thead>
-              <tr className="bg-gray-400 text-left">
-                <th className="p-2 border-r border-gray-600">Name</th>
-                <th className="p-2 border-r border-gray-600">Email</th>
-                <th className="p-2 border-r border-gray-600">Paid</th>
-                <th className="p-2">Joined</th>
-              </tr>
-            </thead>
-            <tbody>
-              {members.map((member) => (
-                <tr key={member.id} className="border-t border-gray-600">
-                  <td className="p-2 border-r border-gray-700">{member.name}</td>
-                  <td className="p-2 border-r border-gray-700">{member.email}</td>
-                  <td className="p-2 border-r border-gray-700">
-                    {member.paid ? "✅ Yes" : "❌ No"}
-                  </td>
-                  <td className="p-2">
-                    {new Date(member.created_at).toLocaleString()}
-                  </td>
+        <>
+          {/* Table for desktop */}
+          {!isMobile && (
+            <table className="w-full border-collapse border border-gray-700 rounded">
+              <thead>
+                <tr className="bg-gray-400 text-left">
+                  <th className="p-2 border border-gray-600">Name</th>
+                  <th className="p-2 border border-gray-600">Email</th>
+                  <th className="p-2 border border-gray-600">Paid</th>
+                  <th className="p-2 border border-gray-600">Joined</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {members.map((member) => (
+                  <tr key={member.id} className="border border-gray-600">
+                    <td className="p-2 border border-gray-700 ">{member.name}</td>
+                    <td className="p-2 border border-gray-700">{member.email}</td>
+                    <td className="p-2 border border-gray-700">
+                      {member.paid ? "✅ Yes" : "❌ No"}
+                    </td>
+                    <td className="p-2 border border-gray-700">
+                      {new Date(member.created_at).toLocaleString()}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+
+          {/* Card view for mobile */}
+          {isMobile && (
+  <div className="space-y-6 px-2">
+    {members.map((member) => (
+      <div
+        key={member.id}
+        className="border border-gray-300 rounded-lg p-5 bg-white shadow-md hover:shadow-lg transition-shadow duration-300"
+      >
+        <p className="mb-2">
+          <span className="font-semibold text-gray-700">Name:</span>{" "}
+          <span className="text-gray-900">{member.name}</span>
+        </p>
+        <p className="mb-2">
+          <span className="font-semibold text-gray-700">Email:</span>{" "}
+          <span className="text-blue-600 break-all">{member.email}</span>
+        </p>
+        <p className="mb-2">
+          <span className="font-semibold text-gray-700">Paid:</span>{" "}
+          <span
+            className={
+              member.paid
+                ? "text-green-600 font-semibold"
+                : "text-red-600 font-semibold"
+            }
+          >
+            {member.paid ? "✅ Yes" : "❌ No"}
+          </span>
+        </p>
+        <p>
+          <span className="font-semibold text-gray-700">Joined:</span>{" "}
+          <span className="text-gray-600 text-sm">
+            {new Date(member.created_at).toLocaleString()}
+          </span>
+        </p>
+      </div>
+    ))}
+  </div>
+)}
+        </>
       )}
     </div>
   );

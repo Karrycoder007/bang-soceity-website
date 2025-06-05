@@ -35,12 +35,12 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="p-20 bg-gray-900 rounded-md min-h-full text-gray-100 flex gap-8 items-center">
-      <div style={{ width: 250, height: 250 }}>
+    <div className="p-6 bg-gray-900 rounded-md min-h-full text-gray-100 flex flex-wrap gap-8 items-center justify-center">
+      <div className="w-full max-w-xs sm:w-64 sm:h-64">
         <Pie data={userData} />
       </div>
 
-      <table className="table-auto border-collapse border border-gray-600 text-gray-200 w-64">
+      <table className="table-auto border-collapse border border-gray-600 text-gray-200 w-full max-w-xs sm:w-64">
         <thead>
           <tr>
             <th className="border border-gray-600 px-4 py-2 text-left">Category</th>

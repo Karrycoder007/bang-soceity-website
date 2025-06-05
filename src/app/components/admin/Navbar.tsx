@@ -13,7 +13,7 @@ export default function Navbar({ profile, toggleSidebar }: NavbarProps) {
     <nav className="flex items-center justify-between bg-white px-6 py-4 shadow-md">
       {/* Hamburger menu for mobile */}
       <button
-        className="text-gray-300 md:hidden focus:outline-none"
+        className="text-gray-800 md:hidden focus:outline-none"
         onClick={toggleSidebar}
         aria-label="Toggle sidebar"
       >
