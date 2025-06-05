@@ -13,10 +13,10 @@ const navLinks = [
   { name: ' About', path: '/about' },
   { name: ' Membership', path: '/membership' },
   { name: ' Training', path: '/training' },
-  { name: ' Foreign Tour', path: '/tour' },
+  
 ];
 
-export default function Navbar() {
+export default function MainNavbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

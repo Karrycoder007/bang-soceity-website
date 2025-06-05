@@ -4,8 +4,8 @@ import { MapPin, Phone, Mail } from "lucide-react";
 
 export default function ContactSection() {
   return (
-    <section className="max-w-7xl mx-auto p-6 md:p-12">
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-blue-500">
+    <section className="max-w-7xl mx-auto p-6 md:p-12 ">
+      <h2 className="text-3xl md:text-4xl font-bold text-center py-10 mb-8 text-blue-500">
         ಸಂಪರ್ಕಿಸಿ / Contact Us
       </h2>
 

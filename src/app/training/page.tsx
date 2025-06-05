@@ -16,6 +16,7 @@ export default function TrainingPage() {
         </header>
   
         {/* Content */}
+        
         <main className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-8">
           {/* ಪರಿಚಯ */}
           <section>
